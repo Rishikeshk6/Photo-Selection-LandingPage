@@ -4,12 +4,16 @@ import { ClerkProvider } from '@clerk/clerk-react'
 import './index.css'
 import App from './App.jsx'
 
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || "pk_test_cmVsYXRpdmUtYW1vZWJhLTY4LmNsZXJrLmFjY291bnRzLmRldiQ";
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+    {PUBLISHABLE_KEY ? (
+      <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+        <App />
+      </ClerkProvider>
+    ) : (
       <App />
-    </ClerkProvider>
+    )}
   </StrictMode>,
 )
